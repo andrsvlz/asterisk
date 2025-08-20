@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  asterisk-movilcom:
+    build: .
+    container_name: asterisk-movilcom
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./config:/etc/asterisk
+      - ./logs:/var/log/asterisk
+      - asterisk_lib:/var/lib/asterisk
+      - asterisk_spool:/var/spool/asterisk
+    environment:
+      - ASTERISK_USER=5782323
+      - ASTERISK_PASSWORD=av12*
+      - SIP_SERVER=sip.movilcomcolombia.com
+    healthcheck:
+      test: ["CMD", "asterisk", "-rx", "core show version"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  asterisk_lib:
+  asterisk_spool:
