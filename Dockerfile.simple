@@ -1,0 +1,25 @@
+# Dockerfile simple para Asterisk MovilCom Colombia
+FROM debian:bullseye-slim
+
+# Variables de entorno
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Instalar Asterisk y dependencias
+RUN apt-get update && apt-get install -y \
+    asterisk \
+    asterisk-modules \
+    iputils-ping \
+    dnsutils \
+    && rm -rf /var/lib/apt/lists/*
+
+# Crear directorios
+RUN mkdir -p /var/lib/asterisk /var/log/asterisk /var/spool/asterisk
+
+# Copiar configuraciones
+COPY config/ /etc/asterisk/
+
+# Exponer puertos
+EXPOSE 5060/udp 10000-10100/udp
+
+# Comando por defecto
+CMD ["asterisk", "-f", "-vvv"]
