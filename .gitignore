@@ -1,5 +1,23 @@
+# Archivos de configuración generados por Docker
+config/*.dpkg-new
+config/acl.conf
+config/adsi.conf
+config/agents.conf
+config/alarmreceiver.conf
+config/alsa.conf
+config/amd.conf
+config/app_mysql.conf
+config/app_skel.conf
+config/ari.conf
+config/ast_debug_tools.conf
+config/asterisk.adsi
+config/manager.d/
+
+# Logs y temporales
 logs/
 *.log
+*.pid
+*.lock
 .env
 .DS_Store
 Thumbs.db
